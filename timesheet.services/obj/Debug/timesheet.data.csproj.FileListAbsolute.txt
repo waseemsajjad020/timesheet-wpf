@@ -1,0 +1,9 @@
+D:\Job\Companies\GAC\timesheet-wpf-master\timesheet-wpf-master\timesheet.services\bin\Debug\timesheet.services.dll
+D:\Job\Companies\GAC\timesheet-wpf-master\timesheet-wpf-master\timesheet.services\bin\Debug\timesheet.services.pdb
+D:\Job\Companies\GAC\timesheet-wpf-master\timesheet-wpf-master\timesheet.services\bin\Debug\Newtonsoft.Json.dll
+D:\Job\Companies\GAC\timesheet-wpf-master\timesheet-wpf-master\timesheet.services\bin\Debug\Newtonsoft.Json.xml
+D:\Job\Companies\GAC\timesheet-wpf-master\timesheet-wpf-master\timesheet.services\obj\Debug\timesheet.data.csproj.CoreCompileInputs.cache
+D:\Job\Companies\GAC\timesheet-wpf-master\timesheet-wpf-master\timesheet.services\obj\Debug\timesheet.data.csproj.CopyComplete
+D:\Job\Companies\GAC\timesheet-wpf-master\timesheet-wpf-master\timesheet.services\obj\Debug\timesheet.services.dll
+D:\Job\Companies\GAC\timesheet-wpf-master\timesheet-wpf-master\timesheet.services\obj\Debug\timesheet.services.pdb
+D:\Job\Companies\GAC\timesheet-wpf-master\timesheet-wpf-master\timesheet.services\obj\Debug\timesheet.data.csprojAssemblyReference.cache

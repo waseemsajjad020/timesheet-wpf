@@ -1,0 +1,183 @@
+﻿<UserControl x:Class="timesheet.wpf.Views.TimeSheet.TimesheetView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:Controls="clr-namespace:timesheet.wpf.Views.TimeSheet.Controls"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"  
+             mc:Ignorable="d" 
+             d:DesignHeight="750" d:DesignWidth="1200" > 
+    <Grid Margin="20,0,20,20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid x:Name="grdFilters">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Select Employee:" FontSize="14" VerticalAlignment="Center"/>
+                <ComboBox Width="200" x:Name="comEmployees" VerticalAlignment="Center" ItemsSource="{Binding Employees,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedEmployee,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" VerticalContentAlignment="Center" Margin="20,0,0,0">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left" Text="{Binding Name,UpdateSourceTrigger=PropertyChanged}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                <Button Style="{StaticResource RoundButton}" x:Name="btnPrevious" Click="btnPrevious_Click">
+                    <Viewbox Margin="10,10,13,10" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Grid>
+                            <Grid Name="backgroundGrid" Width="256" Height="256" Visibility="Collapsed" />
+                            <Path Data="M15.854048,0L17.272997,1.4100033 2.8199543,15.950011 17.351,30.587004 15.932051,31.996001 0,15.949004z" Stretch="Uniform" Fill="#FFFFFFFF" Width="138" Height="138" Margin="0,0,0,0" RenderTransformOrigin="0.5,0.5">
+                                <Path.RenderTransform>
+                                    <TransformGroup>
+                                        <TransformGroup.Children>
+                                            <RotateTransform Angle="0" />
+                                            <ScaleTransform ScaleX="1" ScaleY="1" />
+                                        </TransformGroup.Children>
+                                    </TransformGroup>
+                                </Path.RenderTransform>
+                            </Path>
+                        </Grid>
+                    </Viewbox>
+                </Button>
+                <Border Width="200" BorderBrush="#3A4B3B" BorderThickness="2" CornerRadius="8" Background="White"  Margin="10,0,10,0">
+                    <TextBlock FontSize="15" Text="{Binding TimeSheetDurationLabel,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Border>
+                <Button Style="{StaticResource RoundButton}" x:Name="btnNext" Click="btnNext_Click">
+                    <Viewbox Margin="13,10,10,10" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Grid>
+                            <Grid Width="256" Height="256" Visibility="Collapsed" />
+                            <Path Data="M15.854048,0L17.272997,1.4100033 2.8199543,15.950011 17.351,30.587004 15.932051,31.996001 0,15.949004z" Stretch="Uniform" Fill="#FFFFFFFF" Width="138" Height="138" Margin="0,0,0,0" RenderTransformOrigin="0.5,0.5">
+                                <Path.RenderTransform>
+                                    <TransformGroup>
+                                        <TransformGroup.Children>
+                                            <RotateTransform Angle="0" />
+                                            <ScaleTransform ScaleX="-1" ScaleY="1" />
+                                        </TransformGroup.Children>
+                                    </TransformGroup>
+                                </Path.RenderTransform>
+                            </Path>
+                        </Grid>
+                    </Viewbox>
+                </Button>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" Background="#3A4B3B">
+                <Grid VerticalAlignment="Center" Margin="10,0,30,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="240"/>
+                        <ColumnDefinition Width="0"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Task Name" FontSize="14" Foreground="White"/>
+                    <TextBlock Text="Sunday" FontSize="14" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+                    <TextBlock Text="Monday" FontSize="14" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+                    <TextBlock Text="Tuesday" FontSize="14" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+                    <TextBlock Text="Wednesday" FontSize="14" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+                    <TextBlock Text="Thursday" FontSize="14" Grid.Column="6" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+                    <TextBlock Text="Friday" FontSize="14" Grid.Column="7" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+                    <TextBlock Text="Saturday" FontSize="14" Grid.Column="8" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+                </Grid>
+            </Grid>
+            <Border Grid.Row="1" BorderBrush="#3A4B3B" BorderThickness="2,0,2,2">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <ListBox Background="Transparent" x:Name="lstTimeSheet" ItemsSource="{Binding SelectedEmployee.Tasks,UpdateSourceTrigger=PropertyChanged}" AlternationCount="2" BorderBrush="Transparent" BorderThickness="0">
+                        <ListBox.Resources>
+                            <Style TargetType="{x:Type ListBoxItem}">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+                                <Setter Property="Padding" Value="0,0,0,0"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                                            <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0" Background="{TemplateBinding Background}" Padding="0" SnapsToDevicePixels="true">
+                                                <ContentPresenter HorizontalAlignment="Stretch" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="Stretch" Margin="0"/>
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsSelected" Value="true">
+                                                    <Setter Property="Background" TargetName="Bd" Value="Transparent"/>
+                                                </Trigger>
+                                                <MultiTrigger>
+                                                    <MultiTrigger.Conditions>
+                                                        <Condition Property="IsSelected" Value="true"/>
+                                                        <Condition Property="Selector.IsSelectionActive" Value="false"/>
+                                                    </MultiTrigger.Conditions>
+                                                    <Setter Property="Background" Value="Transparent"/>
+                                                    <Setter Property="Background" TargetName="Bd" Value="Transparent"/>
+                                                </MultiTrigger>
+                                                <Trigger Property="IsEnabled" Value="false">
+                                                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                                                </Trigger>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Background" Value="Transparent"/>
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="ItemsControl.AlternationIndex" Value="0">
+                                        <Setter Property="Background" Value="#E6E7EF"></Setter>
+                                    </Trigger>
+                                    <Trigger Property="ItemsControl.AlternationIndex" Value="1">
+                                        <Setter Property="Background" Value="#fff"></Setter>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ListBox.Resources>
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Controls:TimeSheetListItem DataContext="{Binding}"  OnItemValueChanged="OnTimeSheetValueChanged"/>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <Border Grid.Column="1" Width="2" HorizontalAlignment="Left" Margin="245,0,0,0" Background="#3A4B3B"/>
+                    <Border Height="40" Grid.Row="1" BorderBrush="#3A4B3B" BorderThickness="0,2,0,0">
+                        <Grid VerticalAlignment="Center" Margin="10,0,30,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="240"/>
+                                <ColumnDefinition Width="0"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Total" FontSize="15"/>
+                            <TextBlock x:Name="lblTotalSunday" Text="0" FontSize="15" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <TextBlock x:Name="lblTotalMonday" Text="0" FontSize="15" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <TextBlock x:Name="lblTotalTuesday" Text="0" FontSize="15" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <TextBlock x:Name="lblTotalWednesday" Text="0" FontSize="15" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <TextBlock x:Name="lblTotalThursday" Text="0" FontSize="15" Grid.Column="6" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <TextBlock x:Name="lblTotalFriday" Text="0" FontSize="15" Grid.Column="7" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <TextBlock x:Name="lblTotalSaturday" Text="0" FontSize="15" Grid.Column="8" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Grid>
+                    </Border>
+                </Grid>
+            </Border>
+            <StackPanel Orientation="Horizontal" Grid.Row="2" Margin="0,10,0,0" HorizontalAlignment="Right">
+                <Button Content="Back to List" x:Name="btnBack" Click="btnBack_Click"  Width="100" Height="35" />
+                <Button Content="Save" Margin="20,0,0,0" x:Name="btnSave" Click="btnSave_Click"  Width="100" Height="35" />
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>
